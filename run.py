@@ -25,12 +25,11 @@ class Hive:
         self.guesses.append((x, y))
         self.hive[x][y] = 'x'
 
-
-    def add_bee():
+    def add_bee(self, x, y, type='computer'):
         print('add_bee')
 
 
-def random_point():
+def random_point(size):
     """
     Helper function to return random integer that fits in the hive
     """
@@ -41,7 +40,7 @@ def validate_guess():
     print('validate_guess')
 
 
-def place_bees():
+def place_bees(hive):
     print('place_bees')
 
 
@@ -70,14 +69,12 @@ def new_game():
     print('Use letters for the x-axis (horizontal) and numbers for the y-axis (vertical)')
     name = input('Please give your name so the bees can say thanks!\n')
 
+    computer_hive = Hive(size, num_bees, 'Computer', type='computer')
+    player_hive = Hive(size, num_bees, name, type='player')
 
-random_point()
-
-
-validate_guess()
-
-
-place_bees()
+    for _ in range(num_bees):
+        place_bees(computer_hive)
+        place_bees(player_hive)
 
 
 play_game()
