@@ -11,12 +11,16 @@ class Hive:
 
     def __init__(self, size, num_bees, name, type):
         self.size = size
-        self.hive = [["." for x in range(size)] for y in range(size)]
+        self.hive = [["|" for x in range(size)] for y in range(size)]
         self.num_bees = num_bees
         self.name = name
         self.type = type
         self.guesses = []
         self.bees = []
+
+    def print_hive(hive):
+        for row in self.hive:
+            print("|".join(row))
 
     def guess(self, x, y):
         """
@@ -24,6 +28,12 @@ class Hive:
         """
         self.guesses.append((x, y))
         self.hive[x][y] = 'x'
+
+        if (x, y) in self.bees:
+            self.hive[x][y] = '*'
+            return 'Dinnertime for the bees!'
+        else:
+            return 'Still hungry :('
 
     def add_bee(self, x, y, type='computer'):
         print('add_bee')
@@ -33,7 +43,7 @@ def random_point(size):
     """
     Helper function to return random integer that fits in the hive
     """
-    print('random_point')
+    return randint(0, size-1)
 
 
 def validate_guess():
