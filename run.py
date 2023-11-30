@@ -50,7 +50,25 @@ def play_game():
 
 
 def new_game():
-    print('new_game')
+    """
+    Starts new game. Sets the bees in the hives with correct number
+    of bees, resets the scores and initialises the hives
+    """
+
+    size = 10
+    num_bees = 6
+    scores['computer'] = 0
+    scores['player'] = 0
+    print('Welcome to Free the Bees!')
+    print("In a dystopian time, bees are hungry and can't escape their hive")
+    print('You have stumbled across a beehive and want to help')
+    print('Try to give the bees nectar without destroying their home')
+    print(f'The hive is {size} squares long and high')
+    print(f'There are {num_bees} bees to find in each hive')
+    print('Feed all the bees before the computer to win!')
+    print('Feed the bees by guessing a coordinate eg A0')
+    print('Use letters for the x-axis (horizontal) and numbers for the y-axis (vertical)')
+    name = input('Please give your name so the bees can say thanks!\n')
 
 
 random_point()
