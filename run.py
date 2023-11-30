@@ -18,11 +18,16 @@ class Hive:
         self.guesses = []
         self.bees = []
 
-    def guess():
-        print(guess)
+    def guess(self, x, y):
+        """
+        Adds previously guessed co-ordinates to guesses list
+        """
+        self.guesses.append((x, y))
+        self.hive[x][y] = 'x'
+
 
     def add_bee():
-        print(add_bee)
+        print('add_bee')
 
 
 def random_point():
