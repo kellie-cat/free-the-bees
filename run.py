@@ -1,3 +1,4 @@
+import random
 from random import randint
 
 import colorama
@@ -7,6 +8,7 @@ colorama.init()
 print(Fore.BLACK + Back.YELLOW + Style.BRIGHT)
 
 scores = {'computer': 0, 'player': 0}
+
 
 class Hive:
     """
@@ -50,6 +52,7 @@ class Hive:
     def add_bee(self, x, y, hive='computer'):
         print('add_bee')
 
+
 class Bee:
     """
     This class will define the Bee Types and place them in the hive, count the
@@ -57,6 +60,14 @@ class Bee:
     """
     def __init__(self, hive):
         self.hive = hive
+
+    def create_bees(self):
+        for i in range(5):
+            self.x_row, self.y_column = random.randint(0, 7), random.randint(0, 7)
+        while self.hive[self.x_row][self.y_column] == "X":
+            self.x_row, self.y_column = random.randint(0, 7), random.randint(0, 7)
+            self.hive[self.x_row][self.y_column] = "X"
+        return self.hive
 
 
 def random_point(size):
