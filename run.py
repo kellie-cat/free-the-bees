@@ -1,3 +1,6 @@
+import unicodedata
+from unicodedata import normalize
+
 import random
 from random import randint
 
@@ -8,6 +11,25 @@ colorama.init()
 print(Fore.BLACK + Back.YELLOW + Style.BRIGHT)
 
 scores = {'computer': 0, 'player': 0}
+
+BEE_TYPES = [
+    ('Queen Bee', 4),
+    ('Worker Bee', 3),
+    ('Drone', 3),
+    ('Larva', 2)
+]
+
+HIVE_SIZE = 8
+
+VERTICAL_BEE = '|'
+HORIZONTAL_BEE = '-'
+EMPTY = 'O'
+# Sad face to symbolise a missed guess.
+MISS = 'U+1F641'
+# Drop of nectar to symbolise the bee got nectar!
+EAT = 'U+1F4A7'
+# Bee to symbolise the whole bee is energised!
+FULL = 'U+1F41D'
 
 
 class Hive:
