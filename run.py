@@ -19,8 +19,6 @@ BEE_TYPES = [
     ('Larva', 2)
 ]
 
-HIVE_SIZE = 8
-
 VERTICAL_BEE = '|'
 HORIZONTAL_BEE = '-'
 # Empty hexagon to symbolise an empty co-ordinate.'U+2B21'
@@ -119,11 +117,56 @@ class Bee:
         To check if guess coordinates match bee coordinates
         """
         found_bees = 0
-        for row in self.board:
+        for row in self.hive:
             for column in row:
                 if column == 'X':
                     found_bees += 1
         return found_bees
+
+
+def play_game():
+    size = 8
+    num_bees = 5
+    computer_hive = Hive(size, num_bees, 'Computer', hive='computer')
+    player_hive = Hive(size, num_bees, 'Player', hive='player')
+
+    """
+    computer_hive = Hive([[" "] * size for i in range(size)])
+    player_hive = Hive([[" "] * size for i in range(size)])
+    Bee.create_bees(computer_hive)
+    """
+
+    """
+    # start 20 turns
+    turns = 20
+    while turns > 0:
+        Hive.print_hive(player_hive)
+        # get user input
+        user_x_row, user_y_column = Bee.get_user_input(object)
+        # check if user error duplicate coordinates
+        while player_hive.hive[user_x_row][user_y_column] == "-" \
+                or player_hive.hive[user_x_row][user_y_column] == "X":
+            print("You already fed that part of the hive")
+            user_x_row, user_y_column = Bee.get_user_input(object)
+        # check if MISS or EAT
+        if player_hive.hive[user_x_row][user_y_column] == "X":
+            print("You fed a bee!")
+            player_hive.hive[user_x_row][user_y_column] = "X"
+        else:
+            print("You missed the bees, they're still hungry!")
+            player_hive.hive[user_x_row][user_y_column] = "-"
+        # check for win or lose
+        if Bee.count_found_bees(player_hive) == 5:
+            print("You fed all the bees!")
+            break
+        else:
+            turns -= 1
+            print(f"You have {turns} turns remaining")
+            if turns == 0:
+                print("Sorry you ran out of turns")
+                Hive.print_hive(player_hive)
+                break
+    """
 
 
 def random_point(size):
@@ -139,10 +182,6 @@ def validate_guess():
 
 def place_bees(hive):
     return place_bees
-
-
-def play_game():
-    print('play_game')
 
 
 def new_game():
@@ -173,6 +212,7 @@ def new_game():
         place_bees(player_hive)
 
     Hive.print_hive(player_hive)
+    print('\n')
     Hive.print_hive(computer_hive)
 
 
