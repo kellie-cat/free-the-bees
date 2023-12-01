@@ -1,5 +1,11 @@
 from random import randint
 
+import colorama
+from colorama import Fore, Back, Style
+colorama.init()
+
+print(Fore.BLACK + Back.YELLOW + Style.BRIGHT)
+
 scores = {'computer': 0, 'player': 0}
 
 class Hive:
@@ -43,6 +49,14 @@ class Hive:
 
     def add_bee(self, x, y, hive='computer'):
         print('add_bee')
+
+class Bee:
+    """
+    This class will define the Bee Types and place them in the hive, count the
+    scores and determine when the game is over
+    """
+    def __init__(self, hive):
+        self.hive = hive
 
 
 def random_point(size):
