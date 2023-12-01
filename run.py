@@ -23,13 +23,14 @@ HIVE_SIZE = 8
 
 VERTICAL_BEE = '|'
 HORIZONTAL_BEE = '-'
+# Empty hexagon to symbolise an empty co-ordinate.'U+2B21'
 EMPTY = 'O'
-# Sad face to symbolise a missed guess.
-MISS = 'U+1F641'
-# Drop of nectar to symbolise the bee got nectar!
-EAT = 'U+1F4A7'
-# Bee to symbolise the whole bee is energised!
-FULL = 'U+1F41D'
+# Red cross to symbolise a missed guess. 'U+274C'
+MISS = '.'
+# Drop of nectar to symbolise the bee got nectar! 'U+1F4A7'
+EAT = 'X'
+# Bee to symbolise the whole bee is energised! 'U+1F41D'
+FULL = '*'
 
 
 class Hive:
@@ -88,10 +89,10 @@ class Bee:
         for i in range(5):
             self.x_row, self.y_column = random.randint(0, 7), random.randint(0,
                                                                              7)
-        while self.hive[self.x_row][self.y_column] == "X":
+        while self.hive[self.x_row][self.y_column] == 'X':
             self.x_row, self.y_column = random.randint(0, 7), random.randint(0,
                                                                              7)
-            self.hive[self.x_row][self.y_column] = "X"
+            self.hive[self.x_row][self.y_column] = 'X'
         return self.hive
 
     def get_user_guess(self):
@@ -112,6 +113,14 @@ class Bee:
         except ValueError and KeyError:
             print("Not a valid guess, please try again!")
             return self.get_user_guess()
+
+    def count_found_bees(self):
+        found_bees = 0
+        for row in self.board:
+            for column in row:
+                if column == 'X':
+                    found_bees += 1
+        return found_bees
 
 
 def random_point(size):
