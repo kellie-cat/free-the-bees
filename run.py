@@ -20,12 +20,13 @@ class Hive:
         self.size = size
         self.hive = hive
         self.num_bees = num_bees
-        self.name = name
         self.guesses = []
         self.bees = []
 
-    def make_letters_to_numbers():
-        letters_to_numbers = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5, 'G': 6, 'H': 7}
+    def make_letters_numbers():
+        letters_to_numbers = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5,
+                              'G': 6, 'H': 7
+                              }
         return letters_to_numbers
 
     def print_hive(self):
@@ -63,11 +64,32 @@ class Bee:
 
     def create_bees(self):
         for i in range(5):
-            self.x_row, self.y_column = random.randint(0, 7), random.randint(0, 7)
+            self.x_row, self.y_column = random.randint(0, 7), random.randint(0,
+                                                                             7)
         while self.hive[self.x_row][self.y_column] == "X":
-            self.x_row, self.y_column = random.randint(0, 7), random.randint(0, 7)
+            self.x_row, self.y_column = random.randint(0, 7), random.randint(0,
+                                                                             7)
             self.hive[self.x_row][self.y_column] = "X"
         return self.hive
+
+    def get_user_guess(self):
+        try:
+            x_row = input("Enter a number to guess the row the bee is on: ")
+            while x_row not in '12345678':
+                print('Not a valid guess, try a number between 1 - 8')
+                x_row = input(
+                    "Enter a number to guess the row the bee is on: ")
+
+            y_column = input(
+                "Enter a letter to guess the column the bee is on: ").upper()
+            while y_column not in "ABCDEFGH":
+                print('Not a valid guess, try a letter between A and H')
+                y_column = input("Enter a letter to guess the column the bee\
+                                  is on: ").upper()
+            return int(x_row) - 1, Hive.make_letters_numbers()[y_column]
+        except ValueError and KeyError:
+            print("Not a valid guess, please try again!")
+            return self.get_user_guess()
 
 
 def random_point(size):
@@ -117,6 +139,7 @@ def new_game():
         place_bees(player_hive)
 
     Hive.print_hive(player_hive)
+    Hive.print_hive(computer_hive)
 
 
 play_game()
