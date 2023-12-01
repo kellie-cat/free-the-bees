@@ -24,9 +24,19 @@ HIVE = [
 
 def start_game():
     print('Welcome to Free the Bees!')
-    name = input('Please tell us your name so the bees can say thanks!\n')
-    if name == '' or '0':
-        print("Please give a name - bees don't like strangers!")
-        name = input('Please tell us your name so the bees can say thanks!\n')
+    name = ''
+
+
+while True:
+    name = input("Please tell us your name so the bees can say thanks!\n")
+
+    if len(name) < 2 or name.isnumeric() == True:
+        print("That name is not valid, please enter a name with letters,\
+              bees don't like strangers!")
+        continue
+    else:
+        print(f'Thanks for helping the bees, {name}!')
+        break
+
 
 start_game()
