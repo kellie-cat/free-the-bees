@@ -2,25 +2,31 @@ from random import randint
 
 scores = {'computer': 0, 'player': 0}
 
-
 class Hive:
     """
     The game is played on a board representing a hive. This class sets the
     board size, the number of bees, the player's names and the hive type
     """
 
-    def __init__(self, size, num_bees, name, type):
+    def __init__(self, size, num_bees, name, hive):
         self.size = size
-        self.hive = [["|" for x in range(size)] for y in range(size)]
+        self.hive = hive
         self.num_bees = num_bees
         self.name = name
-        self.type = type
         self.guesses = []
         self.bees = []
 
-    def print_hive(hive):
+    def make_letters_to_numbers():
+        letters_to_numbers = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5, 'G': 6, 'H': 7}
+        return letters_to_numbers
+
+    def print_hive(self):
+        print("  A B C D E F G H")
+        print("  +-+-+-+-+-+-+-+")
+        row_number = 1
         for row in self.hive:
-            print("|".join(row))
+            print("%d|%s|" % (row_number, "|".join(row)))
+            row_number += 1
 
     def guess(self, x, y):
         """
@@ -35,7 +41,7 @@ class Hive:
         else:
             return 'Still hungry :('
 
-    def add_bee(self, x, y, type='computer'):
+    def add_bee(self, x, y, hive='computer'):
         print('add_bee')
 
 
@@ -51,7 +57,7 @@ def validate_guess():
 
 
 def place_bees(hive):
-    print('place_bees')
+    return place_bees
 
 
 def play_game():
@@ -63,9 +69,11 @@ def new_game():
     Starts new game. Sets the bees in the hives with correct number
     of bees, resets the scores and initialises the hives
     """
+    size = 8
+    num_bees = 5
+    computer_hive = Hive(size, num_bees, 'Computer', hive='computer')
+    player_hive = Hive(size, num_bees, 'Player', hive='player')
 
-    size = 10
-    num_bees = 6
     scores['computer'] = 0
     scores['player'] = 0
     print('Welcome to Free the Bees!')
@@ -76,15 +84,14 @@ def new_game():
     print(f'There are {num_bees} bees to find in each hive')
     print('Feed all the bees before the computer to win!')
     print('Feed the bees by guessing a coordinate eg A0')
-    print('Use letters for the x-axis (horizontal) and numbers for the y-axis (vertical)')
+    print('Use letters for x-axis (horizontal), numbers for y-axis (vertical)')
     name = input('Please give your name so the bees can say thanks!\n')
-
-    computer_hive = Hive(size, num_bees, 'Computer', type='computer')
-    player_hive = Hive(size, num_bees, name, type='player')
 
     for _ in range(num_bees):
         place_bees(computer_hive)
         place_bees(player_hive)
+
+    Hive.print_hive(player_hive)
 
 
 play_game()
