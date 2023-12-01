@@ -115,6 +115,9 @@ class Bee:
             return self.get_user_guess()
 
     def count_found_bees(self):
+        """
+        To check if guess coordinates match bee coordinates
+        """
         found_bees = 0
         for row in self.board:
             for column in row:
