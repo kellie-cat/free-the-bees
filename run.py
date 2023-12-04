@@ -29,6 +29,8 @@ def start_game():
     print('Welcome to Free the Bees!')
     name = ''
 
+    make_guess()
+
 
 while True:
     name = input("Please tell us your name so the bees can say thanks!\n")
@@ -57,7 +59,9 @@ def make_random_coordinates(num_points, x_range, y_range):
 
     print(coordinates)
 
+
 random_coordinates = make_random_coordinates(10, (0, 7), (0, 7))
+
 
 print(HIVE)
 print("In a dystopian time, bees are hungry and can't escape their hive")
@@ -70,9 +74,18 @@ print('Feed the bees by guessing a coordinate')
 print('When prompted, input a number for x-axis (horizontal rows) first')
 print('Then a number for the y-axis (vertical columns)')
 
+
 def make_guess():
-    row = input('Enter a number to guess the row the bee is on: \n')
-    column = input('Enter a number to guess the column the bee is on: \n')
+    valid_guess = False
+    while not valid_guess:
+        try:
+            row = int(input('Enter a number to guess the row the bee is on: \n'))
+            if type(row) == int and range(0, 7):
+                print(f'Good guess, {name}!')
+                break
+        except ValueError:
+            print('That guess is not valid. Please try a number')
+            continue
 
 
 start_game()
