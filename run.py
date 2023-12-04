@@ -79,8 +79,8 @@ def make_guess():
     valid_guess = False
     while not valid_guess:
         try:
-            row = int(input('Enter a number to guess the row the bee is on: \n'))
-            if type(row) == int and range(0, 7):
+            row = int(input('Enter a number between 0 and 7 to guess the row the bee is on: \n'))
+            if isinstance(row, int) and row in range(0, 7, 1):
                 print(f'Good guess, {name}!')
                 break
         except ValueError:
