@@ -22,6 +22,7 @@ HIVE = [
 ]
 
 NUM_BEES = 10
+SIZE = 8
 
 
 def start_game():
@@ -57,6 +58,17 @@ def make_random_coordinates(num_points, x_range, y_range):
     print(coordinates)
 
 random_coordinates = make_random_coordinates(10, (0, 7), (0, 7))
+
+print(HIVE)
+print("In a dystopian time, bees are hungry and can't escape their hive")
+print('You have stumbled across a beehive and want to help')
+print('Try to give the bees nectar without destroying their home')
+print(f'The hive is {SIZE} squares long and high')
+print(f'There are {NUM_BEES} bees to find in each hive')
+print('Feed all the bees before the computer to win!')
+print('Feed the bees by guessing a coordinate')
+print('When prompted, input a number for x-axis (horizontal rows) first')
+print('Then a number for the y-axis (vertical columns)')
 
 def make_guess():
     row = input('Enter a number to guess the row the bee is on: \n')
