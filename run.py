@@ -57,7 +57,6 @@ def make_random_coordinates(num_points, x_range, y_range):
     print(coordinates)
 
 random_coordinates = make_random_coordinates(10, (0, 7), (0, 7))
-print(random_coordinates)
 
 def make_guess():
     row = input('Enter a number to guess the row the bee is on: \n')
