@@ -8,31 +8,20 @@ import colorama
 from colorama import Fore, Back, Style
 colorama.init()
 
-HIVE = [
-    ['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'],
-    ['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'],
-    ['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'],
-    ['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'],
-    ['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'],
-    ['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'],
-    ['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'],
-    ['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'],
-    ['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'],
-    ['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O']
-]
+HIVE = []
 
 NUM_BEES = 10
 SIZE = 8
 
 
 def start_game():
-    print('Welcome to Free the Bees!')
     name = ''
 
     make_guess()
 
 
 while True:
+    print('Welcome to Free the Bees!')
     name = input("Please tell us your name so the bees can say thanks!\n")
 
     if len(name) < 2 or name.isnumeric() is True:
@@ -43,7 +32,19 @@ while True:
         print(f'Thanks for helping the bees, {name}!')
         break
 
-player_hive = HIVE
+# Make HIVE
+for i in range(0, 8):
+    HIVE.append(['0'] * 8)
+
+
+# Tidies up the hive
+
+def print_hive(HIVE):
+    for row in HIVE:
+        print((" ").join(row))
+
+
+print_hive(HIVE)
 
 
 def make_random_coordinates(num_points, x_range, y_range):
@@ -60,10 +61,10 @@ def make_random_coordinates(num_points, x_range, y_range):
     print(coordinates)
 
 
+"""
 random_coordinates = make_random_coordinates(10, (0, 7), (0, 7))
+"""
 
-
-print(HIVE)
 print("In a dystopian time, bees are hungry and can't escape their hive")
 print('You have stumbled across a beehive and want to help')
 print('Try to give the bees nectar without destroying their home')
@@ -79,19 +80,19 @@ def make_guess():
     valid_row = False
     while not valid_row:
         try:
-            row = int(input('Enter a number between 0 and 7 to guess the row the bee is on: \n'))
-            if isinstance(row, int) and row in range(0, 7, 1):
+            row = int(input('Enter a number between 0 and 7 to guess the ROW the bee is on: \n'))
+            if isinstance(row, int) and row in range(0, 8, 1):
                 print(f'Good guess, {name}!')
                 break
         except ValueError:
-            print('That guess is not valid. Please try a number')
+            print('That guess is not valid. Please try a whole number')
             continue
 
     valid_column = False
     while not valid_column:
         try:
-            column = int(input('Enter a number between 0 and 7 to guess the column the bee is on: \n'))
-            if isinstance(column, int) and column in range(0, 7, 1):
+            column = int(input('Enter a number between 0 and 7 to guess the COLUMN the bee is on: \n'))
+            if isinstance(column, int) and column in range(0, 8, 1):
                 print(f'Good guess, {name}!')
                 break
         except ValueError:
