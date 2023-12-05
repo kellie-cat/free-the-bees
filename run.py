@@ -25,8 +25,8 @@ while True:
     name = input("Please tell us your name so the bees can say thanks!\n")
 
     if len(name) < 2 or name.isnumeric() is True:
-        print("That name is not valid, please enter a name with letters,\
-              bees don't like strangers!")
+        print("""That name is not valid, please enter a name with letters,
+              bees don't like strangers!""")
         continue
     else:
         print(f'Thanks for helping the bees, {name}!')
@@ -58,7 +58,7 @@ def make_random_coordinates(num_points, x_range, y_range):
         y = randint(y_range[0], y_range[1])
         coordinates.append((x, y))
 
-    print(coordinates)
+    coordinates = 'X'
 
 
 """
@@ -80,7 +80,8 @@ def make_guess():
     valid_row = False
     while not valid_row:
         try:
-            row = int(input('Enter a number between 0 and 7 to guess the ROW the bee is on: \n'))
+            row = int(input("""Enter a number between 0 and 7 to guess the
+                             ROW the bee is on: \n"""))
             if isinstance(row, int) and row in range(0, 8, 1):
                 print(f'Good guess, {name}!')
                 break
@@ -91,12 +92,13 @@ def make_guess():
     valid_column = False
     while not valid_column:
         try:
-            column = int(input('Enter a number between 0 and 7 to guess the COLUMN the bee is on: \n'))
+            column = int(input("""Enter a number between 0 and 7 to guess
+                                the COLUMN the bee is on: \n"""))
             if isinstance(column, int) and column in range(0, 8, 1):
                 print(f'Good guess, {name}!')
                 break
         except ValueError:
-            print('That guess is not valid. Please try a number')
+            print('That guess is not valid. Please try a whole number')
             continue
 
 
