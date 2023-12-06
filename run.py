@@ -9,6 +9,10 @@ from colorama import Fore, Back, Style
 colorama.init()
 
 HIVE = []
+# Hive for player to make guesses to locate bees on, no bees visible until fed
+PLAYER_HIVE = []
+# Hive for player to place bees and computer to make guesses on
+COMPUTER_HIVE = []
 
 NUM_BEES = 10
 SIZE = 8
@@ -18,6 +22,9 @@ def start_game():
     player = ''
 
     make_guess()
+
+    create_bees(PLAYER_HIVE)
+    create_bees(COMPUTER_HIVE)
 
 
 while True:
@@ -33,8 +40,8 @@ while True:
         break
 
 # Make HIVE
-for i in range(0, 8):
-    HIVE.append(['0'] * 8)
+for i in range(0, SIZE):
+    HIVE.append(['0'] * SIZE)
 
 
 # Tidies up the hive
@@ -80,7 +87,7 @@ def make_guess():
     row = input("Enter a number between 0 - 7 to guess the ROW of the bee: \n")
     while row not in "01234567":
         print('Not an appropriate choice, please select a valid row')
-        row = input("Enter a number between 0 - 7 to guess the ROw of the "
+        row = input("Enter a number between 0 - 7 to guess the ROW of the "
                     "bee: \n")
     column = input("Enter a number between 0 - 7 to guess the COLUMN of the "
                    "bee: \n")
@@ -89,6 +96,14 @@ def make_guess():
         column = input("Enter a number between 0 - 7 to guess the COLUMN of "
                        "the bee: \n")
     return int(row), int(column)
+
+
+def create_bees(HIVE):
+    for bee in range(SIZE):
+        bee_row, bee_column = randint(0, 7), randint(0, 7)
+        while HIVE[bee_row][bee_column] == "X":
+            bee_row, bee_column = make_guess()
+        HIVE[bee_row][bee_column] = "X"
 
 
 start_game()
