@@ -8,21 +8,22 @@ import colorama
 from colorama import Fore, Back, Style
 colorama.init()
 
-HIVE = []
-# Hive for player to make guesses to locate bees on, no bees visible until fed
-PLAYER_HIVE = []
-# Hive for player to place bees and computer to make guesses on
-COMPUTER_HIVE = []
-
 NUM_BEES = 10
 SIZE = 8
-
-# Make HIVE
-for i in range(0, SIZE):
-    HIVE.append(['0'] * SIZE)
+HIVE = []
+# Hive for player to make guesses to locate bees on, no bees visible until fed
+PLAYER_HIVE = [[' '] * SIZE for x in range(SIZE)]
+# Hive for player to place bees and computer to make guesses on
+COMPUTER_HIVE = [[' '] * SIZE for x in range(SIZE)]
 
 
 def print_hive(HIVE):
+    """
+    Make HIVE
+    """
+    for i in range(0, SIZE):
+        HIVE.append(['0'] * SIZE)
+
     """
     Tidies up the hive
     """
@@ -44,12 +45,14 @@ def print_intro():
 
 def get_player_name():
     while True:
-        player = input("Please tell us your name so the bees can say thanks!\n")
+        player = input("Please tell us your name so the bees can say "
+                       "thanks!\n")
         if len(player) >= 2 and not player.isnumeric():
             print(f'Thanks for helping the bees, {player}!')
             break
         else:
-            print("That name is not valid, please enter a name with letters, bees don't like strangers!")
+            print("That name is not valid, please enter a name with letters,"
+                  " bees don't like strangers!")
 
 
 """
@@ -71,32 +74,41 @@ random_coordinates = make_random_coordinates(10, (0, 7), (0, 7))
 """
 
 
-def make_guess():
-    while True:
-        row = input("Enter a number between 0 - 7 to guess the ROW of the bee: \n")
-        if row in "01234567":
-            break
-        print('Not an appropriate choice, please select a valid row')
-
-    while True:
-        column = input("Enter a number between 0 - 7 to guess the COLUMN of the bee: \n")
-        if column in "01234567":
-            break
-        print('Not an appropriate choice, please select a valid column')
-
-    return int(row), int(column)
-
-
 def create_bees(HIVE):
     for bee in range(SIZE):
         bee_row, bee_column = randint(0, 7), randint(0, 7)
         while HIVE[bee_row][bee_column] == "X":
             bee_row, bee_column = make_guess()
         HIVE[bee_row][bee_column] = "X"
+     
+
+def make_guess():
+    turn = 0
+    if turn in range(15):
+        while True:
+            row = input("Enter a number between 0 - 7 to guess the ROW of the "
+                        "bee: \n")
+            if row in "01234567":
+                break
+            print('Not an appropriate choice, please select a valid row')
+
+        while True:
+            column = input("Enter a number between 0 - 7 to guess the COLUMN "
+                           "of the bee: \n")
+            if column in "01234567":
+                break
+            print('Not an appropriate choice, please select a valid column')
+
+        return int(row), int(column)
+        turn += 1
 
 
 def count_fed_bees(hive):
-    count = sum(row.count("X") for row in hive)
+    count = 0
+    for row in hive:
+        for column in row:
+            if column == 'X':
+                count += 1
     return count
 
 
@@ -104,29 +116,19 @@ def start_game():
     create_bees(PLAYER_HIVE)
     create_bees(COMPUTER_HIVE)
 
-    turns = 15
-    while turns > 0:
+    turn = 0
+    while turn < 5:
         print('Guess a bee location')
         print_hive(COMPUTER_HIVE)
         row, column = make_guess()
         if PLAYER_HIVE[row][column] == "-":
             print("You guessed that one already.")
         elif COMPUTER_HIVE[row][column] == "X":
-            print(Fore.GREEN + "Fed" + Fore.RESET)
+            print(Fore.GREEN + "Well done, you FED a bee!" + Fore.RESET)
             PLAYER_HIVE[row][column] = "X"
-            turns -= 1
-        else:
-            print(Fore.RED + "MISS!" + Fore.RESET)
-            PLAYER_HIVE[row][column] = "-"
-            turns -= 1
-
-        if count_fed_bees(PLAYER_HIVE) == NUM_BEES:
-            print("You win!")
-            break
-
-        print("You have {} turns left".format(turns))
-        if turns == 0:
+        if turn == 0:
             print("You ran out of turns")
+            break
 
 
 if __name__ == "__main__":
