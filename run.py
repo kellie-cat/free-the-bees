@@ -80,21 +80,21 @@ def create_bees(HIVE):
         while HIVE[bee_row][bee_column] == "X":
             bee_row, bee_column = make_guess()
         HIVE[bee_row][bee_column] = "X"
-     
+
 
 def make_guess():
     turn = 0
-    if turn in range(15):
+    if turn in range(5):
         while True:
-            row = input("Enter a number between 0 - 7 to guess the ROW of the "
-                        "bee: \n")
+            row = input("Enter a number between 0 - 7 to guess the ROW of "
+                        "the bee: \n")
             if row in "01234567":
                 break
             print('Not an appropriate choice, please select a valid row')
 
         while True:
-            column = input("Enter a number between 0 - 7 to guess the COLUMN "
-                           "of the bee: \n")
+            column = input("Enter a number between 0 - 7 to guess the "
+                           "COLUMN of the bee: \n")
             if column in "01234567":
                 break
             print('Not an appropriate choice, please select a valid column')
@@ -116,16 +116,25 @@ def start_game():
     create_bees(PLAYER_HIVE)
     create_bees(COMPUTER_HIVE)
 
-    turn = 0
-    while turn < 5:
+    turn = 5
+    while turn > 0:
         print('Guess a bee location')
         print_hive(COMPUTER_HIVE)
         row, column = make_guess()
         if PLAYER_HIVE[row][column] == "-":
             print("You guessed that one already.")
+            turn -= 1
         elif COMPUTER_HIVE[row][column] == "X":
             print(Fore.GREEN + "Well done, you FED a bee!" + Fore.RESET)
             PLAYER_HIVE[row][column] = "X"
+        else:
+            print(Fore.RED + "Sorry, you MISSED!" + Fore.RESET)
+            PLAYER_HIVE[row][column] = "-"
+            turn -= 1
+        if count_fed_bees(PLAYER_HIVE) == NUM_BEES:
+            print("You win!")
+            break
+        print("You have" + str(turn) + "turns left")
         if turn == 0:
             print("You ran out of turns")
             break
