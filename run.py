@@ -15,21 +15,21 @@ SIZE = 8
 
 
 def start_game():
-    name = ''
+    player = ''
 
     make_guess()
 
 
 while True:
     print('Welcome to Free the Bees!')
-    name = input("Please tell us your name so the bees can say thanks!\n")
+    player = input("Please tell us your name so the bees can say thanks!\n")
 
-    if len(name) < 2 or name.isnumeric() is True:
+    if len(player) < 2 or player.isnumeric() is True:
         print("That name is not valid, please enter a name with letters, "
               "bees don't like strangers!")
         continue
     else:
-        print(f'Thanks for helping the bees, {name}!')
+        print(f'Thanks for helping the bees, {player}!')
         break
 
 # Make HIVE
@@ -77,29 +77,18 @@ print('Then a number for the y-axis (vertical columns)')
 
 
 def make_guess():
-    valid_row = False
-    while not valid_row:
-        try:
-            row = int(input("Enter a number between 0 and 7 to guess the"
-                            "  ROW the bee is on: \n"))
-            if isinstance(row, int) and row in range(0, 8, 1):
-                print(f'Good guess, {name}!')
-                break
-        except ValueError:
-            print('That guess is not valid. Please try a whole number')
-            continue
-
-    valid_column = False
-    while not valid_column:
-        try:
-            column = int(input("Enter a number between 0 and 7 to guess"
-                               " the COLUMN the bee is on: \n"
-            if isinstance(column, int) and column in range(0, 8, 1):
-                print(f'Good guess, {name}!')
-                break
-        except ValueError:
-            print('That guess is not valid. Please try a whole number')
-            continue
+    row = input("Enter a number between 0 - 7 to guess the ROW of the bee: \n")
+    while row not in "01234567":
+        print('Not an appropriate choice, please select a valid row')
+        row = input("Enter a number between 0 - 7 to guess the ROw of the "
+                    "bee: \n")
+    column = input("Enter a number between 0 - 7 to guess the COLUMN of the "
+                   "bee: \n")
+    while column not in "01234567":
+        print('Not an appropriate choice, please select a valid column')
+        column = input("Enter a number between 0 - 7 to guess the COLUMN of "
+                       "the bee: \n")
+    return int(row), int(column)
 
 
 start_game()
