@@ -1,6 +1,8 @@
 import unicodedata
 from unicodedata import normalize
 
+import os
+
 import random
 from random import randint
 
@@ -15,6 +17,14 @@ HIVE = []
 PLAYER_HIVE = [[' '] * SIZE for x in range(SIZE)]
 # Hive for player to place bees and computer to make guesses on
 COMPUTER_HIVE = [[' '] * SIZE for x in range(SIZE)]
+
+
+def cls():
+    os.system('cls')
+
+
+# now, to clear the screen
+cls()
 
 
 def print_hive(HIVE):
