@@ -88,16 +88,22 @@ def make_guess():
         while True:
             row = input("Enter a number between 0 - 7 to guess the ROW of "
                         "the bee: \n")
-            if row in "01234567":
+            if row.isdigit() and 0 <= int(row) <= 7:
                 break
-            print('Not an appropriate choice, please select a valid row')
+            elif not row.isdigit():
+                print("A letter or space is not an appropriate choice, please"
+                      " enter a number")
+            elif int(row) >= 8:
+                print("That choice is too big. Pick a number between 0 - 7")
+            else:
+                print("That's not an appropriate choice, please select a "
+                      "valid row by picking a number from 0 - 7, then return")
 
         while True:
             column = input("Enter a number between 0 - 7 to guess the "
                            "COLUMN of the bee: \n")
             if column in "01234567":
                 break
-            print('Not an appropriate choice, please select a valid column')
 
         return int(row), int(column)
         turn += 1
