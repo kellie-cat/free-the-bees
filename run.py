@@ -102,8 +102,17 @@ def make_guess():
         while True:
             column = input("Enter a number between 0 - 7 to guess the "
                            "COLUMN of the bee: \n")
-            if column in "01234567":
+            if column.isdigit() and 0 <= int(column) <= 7:
                 break
+            elif not column.isdigit():
+                print("A letter or space is not an appropriate choice, please"
+                      " enter a number")
+            elif int(column) >= 8:
+                print("That choice is too big. Pick a number between 0 - 7")
+            else:
+                print("That's not an appropriate choice, please select a "
+                      "valid column by picking a number from 0 - 7, then "
+                      "return")
 
         return int(row), int(column)
         turn += 1
