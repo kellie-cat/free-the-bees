@@ -3,6 +3,8 @@ from unicodedata import normalize
 
 import os
 
+import pyfiglet
+
 import random
 from random import randint
 
@@ -27,6 +29,9 @@ def cls():
 cls()
 
 
+welcome_title = pyfiglet.figlet_format("FREE THE BEES", font="bubble")
+
+
 def print_hive(HIVE):
     """
     Make HIVE
@@ -42,6 +47,8 @@ def print_hive(HIVE):
 
 
 def print_intro():
+    print(welcome_title)
+    input("Type any key to enter the game...\n")
     print("In a dystopian time, bees are hungry and can't escape their hive")
     print('You have stumbled across a beehive and want to help')
     print('Try to give the bees nectar without destroying their home')
