@@ -90,11 +90,9 @@ The obvious choice is a use of Yellow and Black to symbolise the bees and I choo
 
 ### Typography
 
-[Google Fonts](https://fonts.google.com/) was used for the fonts and [Font Pair](https://www.fontpair.co/all) helped pick a pair that complemented each other.
-I decided to use a sans-serif font for the majority of the text for accessibility for screens.
-A serif font gave some personality to the headings and added a feel of a traditional photo album.
+[Geeks for Geeks](https://www.geeksforgeeks.org/python-ascii-art-using-pyfiglet-module/) gave a tutorial on ASCII art using the pyfiglet module and I decided to use a font that resembled the hexagons in a bee hive because it is easy to read and on theme.
 
-![Screenshot of fonts](docs/fontpair-dental-quiz.png "Screenshot of fonts")
+![Screenshot of Welcome Art]( "Screenshot of fonts")
 
 ### Wireframes
 
@@ -206,9 +204,7 @@ This website was made using JavaScript, HTML and CSS.
 
 [Codeanywhere](https://dashboard.codeanywhere.com/) - To write the code.
 
-[Google Fonts](https://fonts.google.com/) - To import the fonts used.
-
-[Font Pair](https://www.fontpair.co/all) - To find a complementary font pairing.
+[Geeks for Geeks](https://www.geeksforgeeks.org/python-ascii-art-using-pyfiglet-module/) - To learn how to import pyfiglet to make ASCII Title Art.
 
 [Font Awesome](https://fontawesome.com/) - For the icons and the favicon.
 
@@ -334,8 +330,8 @@ There are no unfixed bugs on the Cavity Prevention Quiz.
 ### Code Used
 
 - [Kera Cudmore's README.md for the Bully Book Club](https://github.com/kera-cudmore/Bully-Book-Club)
-- [W3schools for the Fisher Yates Shuffle Method](https://w3schoolsua.github.io/js/js_array_sort_en.html#gsc.tab=0)
-- [Alvaro Trigo for the CSS animation](https://alvarotrigo.com/blog/css-text-animations/)
+- 
+- [Geeks for Geeks leeson on ASCII art](https://www.geeksforgeeks.org/python-ascii-art-using-pyfiglet-module/)
 
 ### Content
 
