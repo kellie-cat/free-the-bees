@@ -90,7 +90,7 @@ random_coordinates = make_random_coordinates(10, (0, 7), (0, 7))
 """
 
 
-def create_bees(HIVE):
+def create_guess_bees(HIVE):
     for b in range(NUM_BEES):
         bee_row, bee_column = randint(0, 7), randint(0, 7)
         while PLAYER_HIVE[bee_row][bee_column] == "X":
@@ -131,7 +131,7 @@ def make_guess():
                       "return")
 
         return int(row), int(column)
-        guess += 1
+    guess += 1
 
 
 def count_fed_bees(hive):
@@ -144,8 +144,9 @@ def count_fed_bees(hive):
 
 
 def start_game():
-    create_bees(PLAYER_HIVE)
-    create_bees(COMPUTER_HIVE)
+    create_guess_bees(PLAYER_HIVE)
+    print_hive(PLAYER_HIVE)
+    print_hive(COMPUTER_HIVE)
 
     turn = 5
     while turn > 0:
@@ -153,21 +154,22 @@ def start_game():
         print('Guess a bee location')
         row, column = make_guess()
         if PLAYER_HIVE[row][column] == "-":
-            print("You guessed that one already.")
+            print(Fore.YELLOW + "You guessed that one already." + Fore.RESET)
             turn -= 1
         elif COMPUTER_HIVE[row][column] == "X":
             print(Fore.GREEN + "Well done, you FED a bee!" + Fore.RESET)
             PLAYER_HIVE[row][column] = "X"
         else:
-            print(Fore.RED + "Sorry, you MISSED!" + Fore.RESET)
+            print(Fore.RED + "Sorry, you MISSED! The bees are still hungry"
+                  + Fore.RESET)
             PLAYER_HIVE[row][column] = "-"
             turn -= 1
         if count_fed_bees(PLAYER_HIVE) == NUM_BEES:
             print("You win!")
             break
-        print("You have" + str(turn) + "turns left")
+        print("You have " + str(turn) + " turns left")
         if turn == 0:
-            print("You ran out of turns")
+            print("You ran out of turns to help the bees")
             break
 
 
