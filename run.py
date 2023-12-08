@@ -14,7 +14,6 @@ colorama.init()
 
 NUM_BEES = 10
 SIZE = 8
-HIVE = []
 # Hive for player to make guesses to locate bees on, no bees visible until fed
 PLAYER_HIVE = [[' '] * SIZE for x in range(SIZE)]
 # Hive for player to place bees and computer to make guesses on
@@ -48,7 +47,7 @@ def print_hive(HIVE):
 
 def print_intro():
     print(welcome_title)
-    input("Type any key to enter the game...\n")
+    input("Press enter to start the game...\n")
     print("In a dystopian time, bees are hungry and can't escape their hive")
     print('You have stumbled across a beehive and want to help')
     print('Try to give the bees nectar without destroying their home')
@@ -92,11 +91,11 @@ random_coordinates = make_random_coordinates(10, (0, 7), (0, 7))
 
 
 def create_bees(HIVE):
-    for bee in range(SIZE):
+    for b in range(NUM_BEES):
         bee_row, bee_column = randint(0, 7), randint(0, 7)
-        while HIVE[bee_row][bee_column] == "X":
+        while PLAYER_HIVE[bee_row][bee_column] == "X":
             bee_row, bee_column = make_guess()
-        HIVE[bee_row][bee_column] = "X"
+        PLAYER_HIVE[bee_row][bee_column] = "X"
 
 
 def make_guess():
@@ -150,8 +149,8 @@ def start_game():
 
     turn = 5
     while turn > 0:
+        print_hive(COMPUTER_HIVE.pop())
         print('Guess a bee location')
-        print_hive(COMPUTER_HIVE)
         row, column = make_guess()
         if PLAYER_HIVE[row][column] == "-":
             print("You guessed that one already.")
