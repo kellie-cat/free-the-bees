@@ -99,8 +99,8 @@ def create_bees(HIVE):
 
 
 def make_guess():
-    turn = 0
-    if turn in range(5):
+    guess = 0
+    if guess in range(5):
         while True:
             row = input("Enter a number between 0 - 7 to guess the ROW of "
                         "the bee: \n")
@@ -131,7 +131,7 @@ def make_guess():
                       "return")
 
         return int(row), int(column)
-        turn += 1
+        guess += 1
 
 
 def count_fed_bees(hive):
