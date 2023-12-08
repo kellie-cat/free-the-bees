@@ -1,5 +1,4 @@
 SIZE = 8
-player_bee_coordinates = [(0, 4), (3, 3)]
 
 
 def welcome_screen():
@@ -28,11 +27,15 @@ def display_instructions():
     print('Instructions')
 
 
+def player_bee_coordinates():
+    coordinates = [(0, 4), (3, 3)]
+    return coordinates
+
+
 def place_bees():
     """
     In computer hive, asks for bee_row, bee_column input, stores them in
     computer_bee_coordinates
-    In player hive, creates and returns random player_bee_coordinates
     """
     bee_row = input('Please input a row you would like to place a bee:')
     bee_column = input('Please input a column you would like to place a bee:')
@@ -48,7 +51,7 @@ def player_won_results():
 
 def player_guess():
     player_guess_list = []
-    player_bee_coordinates = []
+    player_bee_location = player_bee_coordinates()
     guess = 0
     fed = 0
     for guess in range(0, 2):
@@ -58,7 +61,7 @@ def player_guess():
         print('Add player_guess_coordinates to player_guess_list')
         if player_guess_coordinates in player_guess_list:
             print('You already tried that area, no bees! Try again!')
-        if player_guess_coordinates in player_bee_coordinates:
+        if player_guess_coordinates in player_bee_location:
             print('You found a bee!')
             fed += 1
         else:
